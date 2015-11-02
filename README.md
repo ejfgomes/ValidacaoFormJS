@@ -1,3 +1,10 @@
-Exemplo de validação de formulário
+Validação de formulário
 ===
-É preciso adicionar novas regras de validação.
+É preciso:
+- Criar arquivo de configuração
+- Modularizar
+- Adicionar novas regras de validação.
+===
+
+## Demo
+[Exemplo ValidacaoFormJS](http://ejfgomes.github.io/ValidacaoFormJS/).
