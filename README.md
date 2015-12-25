@@ -1,6 +1,6 @@
 Validação de formulário
 ===
-É preciso:
+Pendente:
 - Criar arquivo de configuração
 - Modularizar
 - Adicionar novas regras de validação
