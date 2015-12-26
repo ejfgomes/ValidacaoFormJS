@@ -1,22 +1,3 @@
-(function() {
-	document.getElementById("listaErros").style.display = "none";
-})();
-
-
-//Regras - [INICIO]
-function Nulo(elemento) {
-    if (elemento.value == '') {
-        return true;
-    }
-
-    return false;
-};
-
-function QuantidadeDeCaracteresEntre (elemento, inicio, fim) {
-	//Implemntar
-}
-//Regras - [INICIO]
-
 function AddErro(elemento) {
     var paiDoPai = elemento.parentElement.parentElement || elemento.parentNode.parentNode;
 
