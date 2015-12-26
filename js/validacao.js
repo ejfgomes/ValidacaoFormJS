@@ -1,30 +1,65 @@
-(function() {
-	document.getElementById("listaErros").style.display = "none";
-})();
+const qtdParentsAteAhLabel = 2;
+const qtdParentsAteOhNomeDoCampo = 2;
+const classeCssRefetenteAoErro = "form-group has-error"
 
+function wrapPadrao(funcaoDeValidacao, elemento, arrayDasMensagens){
 
-//Regras - [INICIO]
-function Nulo(elemento) {
-    if (elemento.value == '') {
-        return true;
+	var event; // The custom event that will be created
+
+	if (document.createEvent) {
+		event = document.createEvent("HTMLEvents");
+		event.initEvent(funcaoDeValidacao, true, true);
+	} else {
+		event = document.createEventObject();
+		event.eventType = funcaoDeValidacao;
+	}
+
+	event.eventName = funcaoDeValidacao;
+
+	var retornoDaFuncaoDeValidacao;
+	if (document.createEvent) {
+		 element.dispatchEvent(event);
+	} else {
+		element.fireEvent("on" + event.eventType, event);
+	}
+
+    if (funcaoDeValidacao(elemento)) {
+        addErroAoElemento(elemento, qtdParentsAteAhLabel, classeCssRefetenteAoErro);
+        //ArrayValidacaoDoFormulario.push(false);
+        arrayDasMensagens.push("O campo " + obtemNomeDoCampo(elemento) + "é obrigatório.");
+    } else {
+        removeErro(elemento);
     }
 
-    return false;
-};
-
-function QuantidadeDeCaracteresEntre (elemento, inicio, fim) {
-	//Implemntar
+    return arrayDasMensagens;
 }
-//Regras - [INICIO]
 
-function AddErro(elemento) {
-    var paiDoPai = elemento.parentElement.parentElement || elemento.parentNode.parentNode;
+function obtemNomeDoCampo(elemento){
 
-    paiDoPai.setAttribute("class", "form-group has-error");
+	var elementoNomeDoCampo = elemento;
+	for (var i = 0; i < qtdParentsAteOhNomeDoCampo; i++) {
+		elementoNomeDoCampo = elementoNomeDoCampo.parentElement || elementoNomeDoCampo.parentNode;
+	};
+
+	return elementoNomeDoCampo.innerHTML;
+}
+
+function addErroAoElemento(elemento, qtdParentsAteAhLabel, classeCss) {
+
+	var pai = elemento;
+	for (var i = 0; i < qtdParentsAteAhLabel; i++) {
+		pai = pai.parentElement || pai.parentNode;
+	};
+
+    pai.setAttribute("class", "form-group has-error");
 };
 
-function RemoveErro(elemento) {
-    var pai = elemento.parentElement.parentElement || elemento.parentNode.parentNode;
+function removeErro(elemento, qtdParentsAteAhLabel, classeCss) {
+
+	var pai = elemento;
+	for (var i = 0; i < qtdParentsAteAhLabel; i++) {
+		pai = pai.parentElement || pai.parentNode;
+	};
 
     pai.setAttribute("class", "form-group");
 };
@@ -45,5 +80,5 @@ function populaListaDeErros(mensagens) {
 		var texto = document.createTextNode(mensagem);
 		li.appendChild(texto);
 		lista.appendChild(li);
-	}
+	}s
 };
