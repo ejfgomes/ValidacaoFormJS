@@ -5,5 +5,5 @@ Pendente:
 - Modularizar
 - Adicionar novas regras de validação
 
-## Demo
+## Demo auto explicativa
 [Exemplo ValidacaoFormJS](http://ejfgomes.github.io/ValidacaoFormJS/).
