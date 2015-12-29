@@ -1,29 +1,10 @@
-(function() {
-	document.getElementById("listaErros").style.display = "none";
-})();
+function addErro(elemento) {
+    var pai = elemento.parentElement.parentElement || elemento.parentNode.parentNode;
 
-
-//Regras - [INICIO]
-function Nulo(elemento) {
-    if (elemento.value == '') {
-        return true;
-    }
-
-    return false;
+    pai.setAttribute("class", "form-group has-error");
 };
 
-function QuantidadeDeCaracteresEntre (elemento, inicio, fim) {
-	//Implemntar
-}
-//Regras - [INICIO]
-
-function AddErro(elemento) {
-    var paiDoPai = elemento.parentElement.parentElement || elemento.parentNode.parentNode;
-
-    paiDoPai.setAttribute("class", "form-group has-error");
-};
-
-function RemoveErro(elemento) {
+function removeErro(elemento) {
     var pai = elemento.parentElement.parentElement || elemento.parentNode.parentNode;
 
     pai.setAttribute("class", "form-group");
@@ -38,12 +19,28 @@ function populaListaDeErros(mensagens) {
 	}
 	//Para limpar a lista - [FIM]
 
-	for(mensagem of mensagens) {
-		document.getElementById("listaErros").style.display = "block";
+	document.getElementById("listaErros").style.display = "block";
 
+	for (var i = 0; i < mensagens.length; i++) {
 		var li = document.createElement("li");
-		var texto = document.createTextNode(mensagem);
+		var texto = document.createTextNode(mensagens[i]);
 		li.appendChild(texto);
 		lista.appendChild(li);
-	}
+	};
 };
+
+function addMensagemDeErro(arrayDasMensagens, mensagem){
+	if (!verificaSeExisteAhStringNoArray(arrayDasMensagens, mensagem))
+		arrayDasMensagens.push(mensagem);
+
+	return arrayDasMensagens;
+}
+
+function verificaSeExisteAhStringNoArray(array, string){
+	for (var i = 0; i < array.length; i++) {
+		if (array[i] == string)
+			return true
+	};
+
+	return false;
+}
